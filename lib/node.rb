@@ -1,4 +1,8 @@
+require 'utils'
+
 class Node
+	include Utils
+
 	@info
 	@left
 	@right
@@ -28,6 +32,10 @@ class Node
 
 		else
 			@info = expression
+
+			# Make sure its a number
+			raise "Invalid Expression: Check syntax" if !Utils::is_a_number?(@info)
+
 			@operator = false
 
 		end

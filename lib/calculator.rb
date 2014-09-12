@@ -1,7 +1,9 @@
 require 'node'
+require 'utils'
 require 'byebug'
 
 class Calculator
+	include Utils
 
 	def self.evaluate(expression)
 		expression = parse_brackets(expression) if expression.include?("(")
@@ -61,7 +63,7 @@ class Calculator
 			expend = expression.index(" ", pow) || expression.length
 			
 			# Check to make sure its valid
-			raise "Invalid Expression: Check your powers!" if !is_a_number?(expression[expstart,pow]) || !is_a_number?(expression[pow+1,expend])
+			raise "Invalid Expression: Check your powers!" if !Utils::is_a_number?(expression[expstart,pow]) || !Utils::is_a_number?(expression[pow+1,expend])
 
 			poweval = expression[expstart, pow].strip.to_i ** expression[pow+1,expend].strip.to_i
 			expression = expression[0,expstart] + poweval.to_s + expression[expend,expression.length]
@@ -70,10 +72,6 @@ class Calculator
 		end
 		
 		return expression
-	end
-
-	def self.is_a_number?(number)
-		 number.match(/[0-9]+/)
 	end
 
 end
