@@ -46,7 +46,6 @@ class Calculator
 			return beginning + parsed.to_s + ending
 
 		else
-			puts "Evaluating: #{expression}"
 			head = Node.new(expression.strip)
 			return head.evaluate
 		end
@@ -61,17 +60,20 @@ class Calculator
 			expstart = expression.rindex(" ", pow) || 0
 			expend = expression.index(" ", pow) || expression.length
 			
-			puts "Start: #{expression[expstart,pow]}"
-			puts "End: #{expression[pow+1,expend]}"
+			# Check to make sure its valid
+			raise "Invalid Expression: Check your powers!" if !is_a_number?(expression[expstart,pow]) || !is_a_number?(expression[pow+1,expend])
 
 			poweval = expression[expstart, pow].strip.to_i ** expression[pow+1,expend].strip.to_i
-			puts "Eval: #{poweval}"
 			expression = expression[0,expstart] + poweval.to_s + expression[expend,expression.length]
 
 			pow = expression.index("^")
 		end
 		
 		return expression
+	end
+
+	def self.is_a_number?(number)
+		 number.match(/[0-9]+/)
 	end
 
 end

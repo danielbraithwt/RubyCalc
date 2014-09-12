@@ -7,7 +7,6 @@ class Node
 	def initialize(expression)
 		expression = expression.to_s
 		expression = expression.strip
-		puts "Node: #{expression}"
 		@operator = true
 
 
