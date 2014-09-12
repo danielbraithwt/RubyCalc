@@ -1,9 +1,11 @@
 require 'node'
+require 'byebug'
 
 class Calculator
 
 	def self.evaluate(expression)
 		expression = parse_brackets(expression) if expression.include?("(")
+		expression = parse_exponents(expression) if expression.include?("^")
 
 		head = Node.new(expression)
 		return head.evaluate
@@ -11,8 +13,9 @@ class Calculator
 
 	private 
 
+	# Function takes an expression and evaluates the brackets in the 
+	# expression
 	def self.parse_brackets(expression)
-
 		open = 1
 		start = expression.index("(")
 
@@ -47,6 +50,28 @@ class Calculator
 			head = Node.new(expression.strip)
 			return head.evaluate
 		end
+	end
+
+	# Function takes an expression and evaulates the powers
+	# in the expression
+	def self.parse_exponents(expression)
+		pow = expression.index("^")
+
+		while pow do
+			expstart = expression.rindex(" ", pow) || 0
+			expend = expression.index(" ", pow) || expression.length
+			
+			puts "Start: #{expression[expstart,pow]}"
+			puts "End: #{expression[pow+1,expend]}"
+
+			poweval = expression[expstart, pow].strip.to_i ** expression[pow+1,expend].strip.to_i
+			puts "Eval: #{poweval}"
+			expression = expression[0,expstart] + poweval.to_s + expression[expend,expression.length]
+
+			pow = expression.index("^")
+		end
+		
+		return expression
 	end
 
 end
