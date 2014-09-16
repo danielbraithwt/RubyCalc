@@ -8,8 +8,8 @@ require "minitest/autorun"
 
 class TestCalculator < MiniTest::Unit::TestCase
 	
-	def test_simple_expression()
-		puts "[*] Testing Simple Expressions"
+	def test_single_operator_expressions()
+		puts "[*] Testing Single Operator Expressions"
 
 		# 1 + 1 should equal 2
 		assert Calculator.evaluate("1 + 1") ==  2, "\t[E] 1 + 1 should equal 2"
@@ -22,7 +22,26 @@ class TestCalculator < MiniTest::Unit::TestCase
 
 		# 2 * 2 should equal 4
 		assert Calculator.evaluate("2 * 2") == 4, "\t[E] 2 * 2 should equals 4"
-			
+		
+		puts "[*] Done!"
+	end
+
+	def test_multiple_operator_expressions()
+		puts "[*] Testing Multiple Operator Expressions"
+
+		# 1 + 4 / 2 should equal 3
+		assert Calculator.evaluate("1 + 4 / 2") == 3, "\t[E] 1 + 4 / 2 should equal 3"
+
+		# 4 - 2 * 3 should equal -2
+		assert Calculator.evaluate("4 - 2 * 3") == -2, "\t[E] 4 - 2 * 3 should equal -2"
+
+		# 5 / 5 + 2 should equal 3
+		assert Calculator.evaluate("5 / 5 + 2") == 3, "\t[E] 5 / 5 + 2 should equal 3"
+
+		# 4 * 2 + 2 should equal 10
+		assert Calculator.evaluate("4 * 2 + 2") == 10, "\t[E] 4 * 2 + 2 should equal 10"
+
+		puts "[*] Done!"
 	end
 
 end
