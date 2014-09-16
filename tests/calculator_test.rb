@@ -44,4 +44,22 @@ class TestCalculator < MiniTest::Unit::TestCase
 		puts "[*] Done!"
 	end
 
+	def test_bracket_expressions()
+		puts "[*] Testing Bracket Expressions"
+
+		# ( 1 + 1 ) * 3 should equal 6
+		assert Calculator.evaluate("( 1 + 1 ) * 3") == 6, "\t[E] ( 1 + 1 ) * 3 should equal 6"
+
+		# ( 3 + 2 ) / 5 should equal 1
+		assert Calculator.evaluate("( 3 + 2 ) / 5") == 4, "\t[E] ( 3 + 2 ) / 5 should equal 5"
+
+		# ( 2 + 3 ) * ( 4 - 3 ) should equal 5
+		assert Calculator.evaluate("( 2 + 3 ) * ( 4 - 3 )") == 5, "\t[E] ( 2 + 3 ) * ( 4 - 3 ) should equal 5"
+
+		# ( 2 + 3 ) + ( 3 + 4 ) should equal 12
+		assert Calculator.evaluate("( 2 + 3 ) + ( 3 + 4 )") == 12, "\t[E] ( 2 + 3 ) * ( 3 + 4 ) should equal 12"
+
+		puts "[*] Done!"
+	end
+
 end
