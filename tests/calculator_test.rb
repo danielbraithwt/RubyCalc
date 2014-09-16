@@ -47,7 +47,7 @@ class TestCalculator < MiniTest::Unit::TestCase
 		assert Calculator.evaluate("( 1 + 1 ) * 3") == 6, "\t[E] ( 1 + 1 ) * 3 should equal 6"
 
 		# ( 3 + 2 ) / 5 should equal 1
-		assert Calculator.evaluate("( 3 + 2 ) / 5") == 4, "\t[E] ( 3 + 2 ) / 5 should equal 5"
+		assert Calculator.evaluate("( 3 + 2 ) / 5") == 1, "\t[E] ( 3 + 2 ) / 5 should equal 5"
 
 		# ( 2 + 3 ) * ( 4 - 3 ) should equal 5
 		assert Calculator.evaluate("( 2 + 3 ) * ( 4 - 3 )") == 5, "\t[E] ( 2 + 3 ) * ( 4 - 3 ) should equal 5"
@@ -60,13 +60,13 @@ class TestCalculator < MiniTest::Unit::TestCase
 		puts "\n[*] Testing Exponent Expressions"
 
 		# 3^2 should equal 6
-		assert Calculator.evaluate("3^2") == 6, "\t[E] 3^2 should equal 6"
+		assert Calculator.evaluate("3^2") == 9, "\t[E] 3^2 should equal 6"
 
 		# 2 + 2^2 should equal 6
 		assert Calculator.evaluate("2 + 2^2") == 6, "\t[E] 2 + 2^2 should equal 6"
 
 		# ( 3 + 3 )^2 should equal 36
-		assert Calculator.evaluate("( 3 + 3 )^2") == 12, "\t[E] ( 3 + 3 )^2 should equal 36"
+		assert Calculator.evaluate("( 3 + 3 )^2") == 36, "\t[E] ( 3 + 3 )^2 should equal 36"
 	end
 
 end
