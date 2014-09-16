@@ -5,12 +5,34 @@ require 'byebug'
 class Calculator
 	include Utils
 
-	def self.evaluate(expression)
-		expression = parse_brackets(expression) if expression.include?("(")
-		expression = parse_exponents(expression) if expression.include?("^")
+	def self.evaluate(expressions)
 
-		head = Node.new(expression)
-		return head.evaluate
+		assignments = {}
+		expressions = expressions.downcase
+		
+		expressions.split(";").each do |expression|
+
+			# Figure out what variable to assign the variable to
+			assignment = "ans"
+			if expression.index("=")
+				assignment = expression[0,expression.index("=")].strip
+				expression = [expression.index("=")+1, expression.length].strip
+			end
+
+			# Replace variable names with there numbers
+			assignments.each do |variable, value|
+				expression = expression.gsub(variable, value.to_s)
+			end
+
+			expression = parse_brackets(expression) if expression.include?("(")
+			expression = parse_exponents(expression) if expression.include?("^")
+
+			head = Node.new(expression)
+			assignments[assignment] = head.evaluate
+			#return head.evaluate
+		end
+
+		return assignments["ans"]
 	end
 
 	private 
