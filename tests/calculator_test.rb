@@ -82,4 +82,17 @@ class TestCalculator < MiniTest::Unit::TestCase
 		assert Calculator.evaluate("2 + 4; ans + 1; ans / 7") == 1, "\t[E] 2 + 4; ans + 1; ans / 7 should equal 1"
 	end
 
+	def test_function_expression()
+		puts "\n[*] Testing Function Expressions"
+		
+		# sin(2) should equal Math.sin(2)
+		assert Calculator.evaluate("sin(2)") == Math.sin(2), "\t[E] sin(2) not correct"
+	
+		# arccos(0.3) should equal Math.acos(0.3)
+		assert Calculator.evaluate("arccos(0.3)") == Math.acos(0.3), "[E] arccos(0.3) not correct"
+
+		# tanh(2) should equal Math.tanh(2)
+		assert Calculator.equal("tanh(2)") == Math.tanh(2), "[E] tanh(2) not correct"
+	end
+
 end
