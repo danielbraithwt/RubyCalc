@@ -21,6 +21,11 @@ class Calculator
 		open = 1
 		start = expression.index("(")
 
+		if !start
+			head = Node.new(expression.strip)
+			return head.evaluate
+		end
+
 		index = start
 		while index && open != 0 do 
 
@@ -38,19 +43,37 @@ class Calculator
 				open = open - 1
 			end
 
+			if start && open == 0
+				parsed = parse_brackets(expression[start+1, index-1].strip)
+				beginning = expression[0,start-1] || ""
+				ending =  expression[index+1,expression.length] || ""
+
+				expression =  beginning + parsed.to_s + ending
+
+				start = expression.index("(")
+				open = open + 1 if start
+			end
+
 		end
 
-		if start && open == 0
-			parsed = parse_brackets(expression[start+1, index-1].strip)
-			beginning = expression[0,start-1] || ""
-			ending =  expression[index+1,expression.length] || ""
+		#if !start
+		#	head = Node.new(expression.strip)
+		#	return head.evaluate
+		#end
 
-			return beginning + parsed.to_s + ending
+		return expression
 
-		else
-			head = Node.new(expression.strip)
-			return head.evaluate
-		end
+		#if start && open == 0
+		#	parsed = parse_brackets(expression[start+1, index-1].strip)
+		#	beginning = expression[0,start-1] || ""
+		#	ending =  expression[index+1,expression.length] || ""
+
+		#	return beginning + parsed.to_s + ending
+
+		#else
+		#	head = Node.new(expression.strip)
+		#	return head.evaluate
+		#end
 	end
 
 	# Function takes an expression and evaulates the powers
