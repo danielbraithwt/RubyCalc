@@ -62,4 +62,17 @@ class TestCalculator < MiniTest::Unit::TestCase
 		puts "[*] Done!"
 	end
 
+	def test_exponent_expressions()
+		puts "[*] Testing Exponent Expressions"
+
+		# 3^2 should equal 6
+		assert Calculator.evaluate("3^2") == 6, "\t[E] 3^2 should equal 6"
+
+		# 2 + 2^2 should equal 6
+		assert Calculator.evaluate("2 + 2^2") == 6, "\t[E] 2 + 2^2 should equal 6"
+
+		# ( 3 + 3 )^2 should equal 36
+		assert Calculator.evaluate("( 3 + 3 )^2") == 12, "\t[E] ( 3 + 3 )^2 should equal 36"
+	end
+
 end
