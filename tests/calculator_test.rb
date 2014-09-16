@@ -69,4 +69,17 @@ class TestCalculator < MiniTest::Unit::TestCase
 		assert Calculator.evaluate("( 3 + 3 )^2") == 36, "\t[E] ( 3 + 3 )^2 should equal 36"
 	end
 
+	def test_multi_line_expressions()
+		puts "\n[*] Testing Multi Line Expressions"
+
+		# 2 + 2; 2 + ans should equal 6
+		assert Calculator.evaluate("2 + 2; 2 + ans") == 6, "\t[E] 2 + 2; 2 + ans should equal 6"
+
+		# x = 2; x^2 should equal 4
+		assert Calculator.evaluate("x = 2; x^2") == 4, "\t[E] x = 2; x^2 should equal 4"
+
+		# 2 + 4; ans + 1; ans / 7 should equal 1
+		assert Calculator.evaluate("2 + 4; ans + 1; ans / 7") == 1, "\t[E] 2 + 4; ans + 1; ans / 7 should equal 1"
+	end
+
 end

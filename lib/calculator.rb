@@ -16,7 +16,7 @@ class Calculator
 			assignment = "ans"
 			if expression.index("=")
 				assignment = expression[0,expression.index("=")].strip
-				expression = [expression.index("=")+1, expression.length].strip
+				expression = expression[expression.index("=")+1, expression.length].strip
 			end
 
 			# Replace variable names with there numbers
