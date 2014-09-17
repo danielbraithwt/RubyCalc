@@ -11,7 +11,18 @@ class Node
 	def initialize(expression)
 		expression = expression.to_s
 		expression = expression.strip
+
 		@operator = true
+
+		if expression[0] == "-" || expression[0] == "+"
+			@info = expression
+			@operator = false
+
+			# Make sure its a number
+			raise "Invalid Expression: Check syntax" if !Utils::is_a_number?(@info[1, @info.length])
+
+			return
+		end
 
 
 		if expression.index('-')
