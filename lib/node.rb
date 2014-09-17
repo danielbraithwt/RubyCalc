@@ -59,8 +59,7 @@ class Node
 	def split_expression(expression)
 		# Splits the expression at the correct operator and then
 		# create the two new nodes
-
-		@left = Node.new(expression[0, expression.index(@info)-1])
+		@left = Node.new(expression[0, expression.index(@info)])
 		@right = Node.new(expression[expression.index(@info)+1, expression.length])
 	end
 

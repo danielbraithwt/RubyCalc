@@ -105,109 +105,134 @@ class Calculator
 	end
 
 	def self.parse_functions(expression)
-		
+
 		# Replace natural log functions
 		while expression.index("ln(") do
 			start = expression.index("ln(")
-			finish = expression.index(")", start)
+			finish = Utils::find_close_bracket(expression[start+2, expression.length])+2
+			raise "Invalid Expression: Check your functions" if finish == nil
 
-			expression = expression[0, start] + (Math.log(expression[start+3, finish].to_f)).to_s + expression[finish+1, expression.length]
+			expression = expression[0, start] + (Math.log(Calculator.evaluate(expression[start+3, finish-3]).to_f)).to_s + expression[finish+1, expression.length]
 		end
 
 		# Replace log functions
 		while expression.index("log(") do
 			start = expression.index("log(")
-			finish = expression.index(")", start)
+			finish = Utils::find_close_bracket(expression[start+3, expression.length])+3
+			raise "Invalid Expression: Check your functions" if finish == nil
 
-			expression = expression[0, start] + (Math.log(expression[start+4, finish].to_f, 10)).to_s + expression[finish+1, expression.length]
+
+			expression = expression[0, start] + (Math.log(Calculator.evaluate(expression[start+4, finish-4]).to_f, 10)).to_s + expression[finish+1, expression.length]
 		end
 
 		# Replace arcsinh functions
 		while expression.index("arcsinh(") do
 			start = expression.index("arcsinh(")
-			finish = expression.index(")", start)
+			finish = Utils::find_close_bracket(expression[start+7, expression.length])+7
+			raise "Invalid Expression: Check your functions" if finish == nil
 
-			expression = expression[0, start] + (Math.asinh(expression[start+8, finish].to_f)).to_s + expression[finish+1, expression.length]
+
+			expression = expression[0, start] + (Math.asinh(Calculator.evaluate(expression[start+8, finish-8]).to_f)).to_s + expression[finish+1, expression.length]
 		end
 
 		# Replace sinh functions
 		while expression.index("sinh(") do
 			start = expression.index("sinh(")
-			finish = expression.index(")", start)
+			finish = Utils::find_close_bracket(expression[start+4, expression.length])+4
+			raise "Invalid Expression: Check your functions" if finish == nil
 
-			expression = expression[0, start] + (Math.sinh(expression[start+5, finish].to_f)).to_s + expression[finish+1, expression.length]
+
+			expression = expression[0, start] + (Math.sinh(Calculator.evaluate(expression[start+5, finish-5]).to_f)).to_s + expression[finish+1, expression.length]
 		end
 
 		# Replace arcsin functions
 		while expression.index("arcsin(") do
 			start = expression.index("arcsin(")
-			finish = expression.index(")", start)
+			finish = Utils::find_close_bracket(expression[start+6, expression.length])+6
+			raise "Invalid Expression: Check your functions" if finish == nil
 
-			expression = expression[0, start] + (Math.asin(expression[start+7, finish].to_f)).to_s + expression[finish+1, expression.length]
+
+			expression = expression[0, start] + (Math.asin(Calculator.evaluate(expression[start+7, finish-7]).to_f)).to_s + expression[finish+1, expression.length]
 		end
 
 		# Replace sin functions
 		while expression.index("sin(") do
 			start = expression.index("sin(")
-			finish = expression.index(")", start)
+			finish = Utils::find_close_bracket(expression[start+3, expression.length])+3
+			raise "Invalid Expression: Check your functions" if finish == nil
 
-			expression = expression[0, start] + (Math.sin(expression[start+4, finish].to_f)).to_s + expression[finish+1, expression.length]
+
+			expression = expression[0, start] + (Math.sin(Calculator.evaluate(expression[start+4, finish-4]).to_f)).to_s + expression[finish+1, expression.length]
 		end
 
 		# Replace cosh functions
 		while expression.index("cosh(") do
 			start = expression.index("cosh(")
-			finish = expression.index(")", start)
+			finish = Utils::find_close_bracket(expression[start+4, expression.length])+4
+			raise "Invalid Expression: Check your functions" if finish == nil
 
-			expression = expression[0, start] + (Math.cosh(expression[start+5, finish].to_f)).to_s + expression[finish+1, expression.length]
+
+			expression = expression[0, start] + (Math.cosh(Calculator.evaluate(expression[start+5, finish-5]).to_f)).to_s + expression[finish+1, expression.length]
 		end
 
 		# Replace arccos functions
 		while expression.index("arccos(") do
 			start = expression.index("arccos(")
-			finish = expression.index(")", start)
+			finish = Utils::find_close_bracket(expression[start+6, expression.length])+6
+			raise "Invalid Expression: Check your functions" if finish == nil
 
-			expression = expression[0, start] + (Math.acos(expression[start+7, finish].to_f)).to_s + expression[finish+1, expression.length]
+
+			expression = expression[0, start] + (Math.acos(Calculator.evaluate(expression[start+7, finish-7]).to_f)).to_s + expression[finish+1, expression.length]
 		end
 
 		# Replace cos functions
 		while expression.index("cos(") do
 			start = expression.index("cos(")
-			finish = expression.index(")", start)
+			finish = Utils::find_close_bracket(expression[start+3, expression.length])+3
+			raise "Invalid Expression: Check your functions" if finish == nil
 
-			expression = expression[0, start] + (Math.cos(expression[start+4, finish].to_f)).to_s + expression[finish+1, expression.length]
+
+			expression = expression[0, start] + (Math.cos(Calculator.evaluate(expression[start+4, finish-4]).to_f)).to_s + expression[finish+1, expression.length]
 		end
 
 		# Replace arctanh functions
 		while expression.index("arctanh(") do
 			start = expression.index("arctanh(")
-			finish = expression.index(")", start)
+			finish = Utils::find_close_bracket(expression[start+7, expression.length])
+			raise "Invalid Expression: Check your functions" if finish == nil
 
-			expression = expression[0, start] + (Math.atanh(expression[start+8, finish].to_f)).to_s + expression[finish+1, expression.length]
+
+			expression = expression[0, start] + (Math.atanh(Calculator.evaluate(expression[start+8, finish-8]).to_f)).to_s + expression[finish+1, expression.length]
 		end
 
 		# Replace tanh functions
 		while expression.index("tanh(") do
 			start = expression.index("tanh(")
-			finish = expression.index(")", start)
+			finish = Utils::find_close_bracket(expression[start+4, expression.length])
+			raise "Invalid Expression: Check your functions" if finish == nil
 
-			expression = expression[0, start] + (Math.tanh(expression[start+5, finish].to_f)).to_s + expression[finish+1, expression.length]
+
+			expression = expression[0, start] + (Math.tanh(Calculator.evaluate(expression[start+5, finish-5]).to_f)).to_s + expression[finish+1, expression.length]
 		end	
 		
 		# Replace arctan functions
 		while expression.index("arctan(") do
 			start = expression.index("arctan(")
-			finish = expression.index(")", start)
+			finish = Utils::find_close_bracket(expression[start+6, expression.length])+6
+			raise "Invalid Expression: Check your functions" if finish == nil
 
-			expression = expression[0, start] + (Math.atan(expression[start+7, finish].to_f)).to_s + expression[finish+1, expression.length]
+
+			expression = expression[0, start] + (Math.atan(Calculator.evaluate(expression[start+7, finish-7]).to_f)).to_s + expression[finish+1, expression.length]
 		end
 
 		# Replace tan functions
 		while expression.index("tan(") do
 			start = expression.index("tan(")
-			finish = expression.index(")", start)
+			finish = Utils::find_close_bracket(expression[start+3, expression.length])+3
+			raise "Invalid Expression: Check your functions" if finish == nil
 
-			expression = expression[0, start] + (Math.tan(expression[start+4, finish].to_f)).to_s + expression[finish+1, expression.length]
+
+			expression = expression[0, start] + (Math.tan(Calculator.evaluate(expression[start+4, finish-4]).to_f)).to_s + expression[finish+1, expression.length]
 		end
 
 		return expression
