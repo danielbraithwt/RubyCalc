@@ -25,6 +25,7 @@ class Calculator
 			end
 			
 			# Parse various parts of the expression
+			expression = parse_constants(expression)
 			expression = parse_functions(expression)
 			expression = parse_brackets(expression) if expression.include?("(")
 			expression = parse_exponents(expression) if expression.include?("^")
@@ -235,6 +236,22 @@ class Calculator
 			expression = expression[0, start] + (Math.tan(Calculator.evaluate(expression[start+4, finish-4]).to_f)).to_s + expression[finish+1, expression.length]
 		end
 
+		return expression
+	end
+
+	def self.parse_constants(expression)
+		# Replace the two letters pi with the constant pi
+		while expression.index("pi") do
+			expression = expression[0, expression.index("pi")] + (Math::PI).to_s + expression[expression.index("pi")+2, expression.length]
+		end
+
+		# Replace the letter e with the constant e
+		while expression.index("e") do
+			expression = expression[0, expression.index("e")] + (Math::E).to_s + expression[expression.index("e")+1, expression.length]
+		end
+
+
+		
 		return expression
 	end
 
