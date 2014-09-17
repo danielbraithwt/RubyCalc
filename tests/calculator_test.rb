@@ -92,7 +92,20 @@ class TestCalculator < MiniTest::Unit::TestCase
 		assert Calculator.evaluate("arccos(0.3)") == Math.acos(0.3), "[E] arccos(0.3) not correct"
 
 		# tanh(2) should equal Math.tanh(2)
-		assert Calculator.equal("tanh(2)") == Math.tanh(2), "[E] tanh(2) not correct"
+		assert Calculator.evaluate("tanh(2)") == Math.tanh(2), "[E] tanh(2) not correct"
+	end
+
+	def testing_nested_function_expressions()
+		puts "\n[*] Testing Nested Function Expressions"
+
+		# sin(1+1) should equal Math.sin(1+1)
+		assert Calculator.evaluate("sin(1+1)") == Math.sin(1+1), "[E] sin(1+1) should equal Math.sin(1+1)"
+
+		# sin(cos(2)) should equal Math.sin(Math.cos(2))
+		assert Calculator.evaluate("sin(cos(2))") == Math.sin(Math.cos(2)), "[E] sin(cos(2)) should equal Math.sin(Math.cos(2))"
+
+		# arcsin(sin(0.5)) should equal 0.5
+		assert Calculator.evaluate("arcsin(sin(0.5))") == 0.5, "[E] arcsin(sin(0.5)) should equal 2"
 	end
 
 end

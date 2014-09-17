@@ -198,7 +198,7 @@ class Calculator
 		# Replace arctanh functions
 		while expression.index("arctanh(") do
 			start = expression.index("arctanh(")
-			finish = Utils::find_close_bracket(expression[start+7, expression.length])
+			finish = Utils::find_close_bracket(expression[start+7, expression.length])+7
 			raise "Invalid Expression: Check your functions" if finish == nil
 
 
@@ -208,7 +208,7 @@ class Calculator
 		# Replace tanh functions
 		while expression.index("tanh(") do
 			start = expression.index("tanh(")
-			finish = Utils::find_close_bracket(expression[start+4, expression.length])
+			finish = Utils::find_close_bracket(expression[start+4, expression.length])+4
 			raise "Invalid Expression: Check your functions" if finish == nil
 
 
