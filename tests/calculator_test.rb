@@ -117,4 +117,16 @@ class TestCalculator < MiniTest::Unit::TestCase
 		assert Calculator.evaluate("e") == Math::E, "[E] e should equal Math::E"
 	end
 
+	def testing_comp_expressions()
+		
+		# sin(pi) should equal Math.sin(Math::PI)
+		assert Calculator.evaluate("sin(pi)") == Math.sin(Math::PI), "[E] sin(pi) should equal Math.sin(Math::PI)"
+
+		# s = pi; cos(s/2) + cos(s/4) should equal Math.cos(Math::PI/2) + Math.cos(Math:PI/4)
+		assert Calculator.evaluate("s = pi; cos(s/2) + cos(x/4)") ==  Math.cos(Math::PI/2) + Math.cos(Math:PI/4), "[E] " 
+
+		# x = (1+2)^2; ln(x) should equal Math.log((1+2)**2)
+		assert Calculator.evaluate("x = (1+2)^2; ln(x)") == Math.log((1+2)**2), "[E] x = (1+2)^2; ln(x) should equal Math.log((1+2)**2)"
+	end
+
 end
