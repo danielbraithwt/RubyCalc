@@ -24,4 +24,6 @@ while expression != "quit" do
 	expression = get_expression
 end
 
+puts "The result is: #{eb.evaluate}"
+
 puts "Goodbye"
