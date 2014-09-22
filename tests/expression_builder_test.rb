@@ -30,6 +30,21 @@ class TestExpressionBuilder < MiniTest::Unit::TestCase
 
 	def test_expression_builder_compile
 		puts "[*] Testing Expression Builder Compile"
+		
+		# Create the expression builder
+		eb = ExpressionBuilder.new
+
+		# Add the line "1+1"
+		eb.add_line("1+1")
+
+		# Test to see if expression is correct
+		assert eb.compile_expression == "1+1;", "[E] The compiled expression should be '1+1;' as we just added that line"
+
+		# Add another line and see if it is in order
+		eb.add_line("x = 0")
+
+		# Test to see if the expression is correct
+		assert eb.compile_expression == "1+1;x = 0;", "[E] The compiled expression should be '1+1;x = 0;' as thoughs are the two lines we inserted"
 
 	end
 
