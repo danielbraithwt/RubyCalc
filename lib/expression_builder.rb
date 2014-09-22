@@ -29,6 +29,11 @@ class ExpressionBuilder
 		@lines << line
 	end
 
+	def set_variable(var_name, var_value)
+		@defined_variables << var_name
+		@lines << "#{var_name}=#{var_value}"
+	end
+
 	def variable_defined?(var)
 		#return false if !@defined_variables
 		return @defined_variables.include?(var)
