@@ -1,6 +1,4 @@
-#APP_ROOT = File.dirname(__FILE__)
 APP_ROOT = File.dirname("../")
-puts APP_ROOT
 $:.unshift( File.join(APP_ROOT, 'lib') )
 
 require "calculator"
