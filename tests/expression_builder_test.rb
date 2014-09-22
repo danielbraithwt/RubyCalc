@@ -29,7 +29,7 @@ class TestExpressionBuilder < MiniTest::Unit::TestCase
 	end
 
 	def test_expression_builder_compile
-		puts "[*] Testing Expression Builder Compile"
+		puts "\n[*] Testing Expression Builder Compile"
 		
 		# Create the expression builder
 		eb = ExpressionBuilder.new
@@ -65,5 +65,17 @@ class TestExpressionBuilder < MiniTest::Unit::TestCase
 
 		# The newly added line should overide the last answer and return 5
 		assert eb.evaluate == 5, "[E] New line should over write the last answer"
+	end
+
+	def test_expression_builder_set_variable
+		puts "\n[*] Testing Expression Builder Set Variable"
+
+		eb = ExpressionBuilder.new
+
+		# Add a variable
+		eb.set_variable("x", "2")
+
+		# Test to see if the builder now contais the variable
+		assert eb.variable_defined?("x") == true, "[E] 'x' varaible should be set but isnt, set_variable function not working"
 	end
 end
