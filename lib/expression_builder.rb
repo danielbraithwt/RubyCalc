@@ -5,6 +5,8 @@ class ExpressionBuilder
 	def initialize
 		@lines = []
 		@defined_variables = []
+		@functions = ['log', 'ln', 'sin', 'cos', 'tan', 'arcsin', 'arccos',
+				'arctan', 'sinh', 'cosh', 'tanh', 'arcsinh', 'arccosh', 'arctanh']
 	end
 
 	def add_line(line)
@@ -65,7 +67,7 @@ class ExpressionBuilder
 		
 		# Make sure that all the variables have been defined
 		components.each do |var|
-			raise "Variable '#{var}' not defined yet!" if !variable_defined?(var) && var != ""
+			raise "Variable '#{var}' not defined yet!" if !variable_defined?(var) && !@functions.include?(var)  && var != ""
 		end
 	end
 
